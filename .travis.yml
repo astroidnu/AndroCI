@@ -2,7 +2,7 @@ language: android
 jdk: oraclejdk8
 sudo: false
 script:
-     - ./gradlew build jacocoTestReport
+     - ./gradlew connectedCheck
 android:
   components:
     - platform-tools
@@ -28,4 +28,5 @@ branches:
   only:
     - master
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t 83fde2f5-6adc-4169-a919-18164acfb997
+  - bash <(curl -s https://codecov.io/bash)
+#  - bash <(curl -s https://codecov.io/bash) -t 83fde2f5-6adc-4169-a919-18164acfb997
