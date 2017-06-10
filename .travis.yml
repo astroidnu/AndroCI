@@ -2,9 +2,19 @@ language: android
 jdk: oraclejdk8
 script:
      - ./gradlew build jacocoTestReport
+android:
+  components:
+    - platform-tools
+    - tools
+    - build-tools-24.0.2
+    - android-22
+    - android-24
+    - sys-img-armeabi-v7a-android-22
+    - extra-android-m2repository
+
 before_script:
   # Create and start emulator
-  - echo no | android create avd --force --name testAVD  --package 'system-images;android-25;google_apis;x86'
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
@@ -16,12 +26,5 @@ before_install:
 branches:
   only:
     - master
-install:
-  - echo y | android update sdk -u -a -t tools
-  - echo y | android update sdk -u -a -t platform-tools
-  - echo y | android update sdk -u -a -t build-tools-25.0.3
-  - echo y | android update sdk -u -a -t android-25
-  - echo y | android update sdk -u -a -t extra-google-m2repository
-  - echo y | android update sdk -u -a -t extra-android-m2repository
 after_success:
   - bash <(curl -s https://codecov.io/bash) -t 83fde2f5-6adc-4169-a919-18164acfb997
