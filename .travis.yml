@@ -5,7 +5,7 @@ notifications:  #Optional
     email:
         - ibnumuzzaakkir@gmail.com #Add your email address
 script:
-    — ./gradlew build jacocoTestReport
+     - ./gradlew connectedCheck
 android:
   components:
     - platform-tools
